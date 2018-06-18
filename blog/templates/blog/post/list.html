@@ -1,0 +1,89 @@
+{% extends "blog/master.html" %}
+{% load staticfiles %}
+
+
+{% block title %}Nasz Blog{% endblock %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/list.css" %}">
+
+    <div class="row search-container">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+        <form method='GET' action=''>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <input type="text" name="q" placeholder="Szuakj postu wg nazwy" value='{{ request.GET.q }}'/>
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <input type="text" name="q2" placeholder="Szukaj postu wg autora" value='{{ request.GET.q2 }}'/>
+            </div>
+            <div class="custom-select col-xs-2 col-sm-2 col-md-2 col-lg-2" style="width:200px;">
+                <select name="q3">
+                    <option value="0">Wszystkie</option>
+                    <option value="1">Ogolne</option>
+                    <option value="2">Zwierzeta</option>
+                    <option value="3">Motoryzacja</option>
+                    <option value="4">Kulinarne</option>
+                    <option value="5">Zdrowie i uroda</option>
+                    <option value="6">Dom/Mieszkanie</option>
+                    <option value="7">Ogrod</option>
+                    <option value="8">Majsterkowanie</option>
+                    <option value="9">Muzyka</option>
+                    <option value="10">Sztuka</option>
+                    <option value="11">Sport</option>
+                </select>
+            </div>
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                <input type="submit" value="Szukaj"/>
+
+            </div>
+        </form>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+    </div>
+    <div class="row">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+    <h2 class="page-header">Ostatnie posty</h2>
+
+    {% for post in posts %}
+<div class="row">
+<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+         <h3><a id="title" href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+</div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        {% if post.image %}
+            <img src="{{ post.image.url }}" class="img-responsive">
+        {% endif %}
+        <p class="small" style="color: #67b168">Opublikowane {{ post.publish }} przez {{ post.author }}</p>
+    </div>
+
+
+</div>
+
+        {#        <p>{{ post.body|truncatewords:25|linebreaks }}</p>#}
+        {#        <a href="{ % url 'post_detail' pk=post.pk % }">Comments: {{ post.comments.count }}</a>#}
+        <p>Komentarze: {{ post.comments.count }}</p>
+        {% if post.status != "" %}
+            <p class="small" style="color: #67b168">private</p>
+        {% endif %}
+        {#         <p>{{ item.pk }}</p>#}
+        {#         <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>#}
+        {% if user.get_username == post.author.get_username %}
+            <a class="btn btn-default" href="{% url 'blog:edit_post' pk=post.pk %}">Edytuj</a>
+            <a class="btn btn-default" href="{% url 'blog:post_remove' pk=post.pk %}">Usuń</a>
+        {% endif %}
+    {% endfor %}
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        {% include "pagination.html" with page=posts %}
+
+    </div>
+    <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></div>
+
+{% endblock %}
+</div>
+
+
+<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+
+</div>
+
+

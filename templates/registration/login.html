@@ -1,0 +1,43 @@
+{% extends "blog/master.html" %}
+{% block content %}
+    <div class="row">
+        {% if form.errors %}
+            <p class="login-error">Twój login lub hasło jest błędne. Spróbuj ponownie</p>
+        {% endif %}
+
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p class="login-error">Twoje konto nie ma dostępu do tej strony. Aby przejść dalej użyj konta z
+                    dostępem.</p>
+            {% else %}
+                <p class="login-title">Zaloguj się</p>
+            {% endif %}
+        {% endif %}
+        <div class="signup-empty"></div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <form method="post" action="{% url 'login' %}">{% csrf_token %}
+                    {% csrf_token %}
+                    <div class="login-label col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ form.username.label_tag }}</div>
+                    <div class="login-form col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ form.username }}</div>
+                    <div class="login-label col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ form.password.label_tag }}</div>
+                    <div class="login-form col-xs-6 col-sm-6 col-md-6 col-lg-6">{{ form.password }}</div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"></div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        {# Assumes you setup the password_reset view in your URLconf #}
+                        <p><a href="{% url 'password_reset' %}">Zapomniałeś hasła?</a></p>
+                        <input class="login-input" type="submit" value="Zaloguj"/>
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+        </div>
+
+
+    </div>
+
+
+
+{% endblock %}

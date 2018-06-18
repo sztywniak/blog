@@ -1,0 +1,67 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static "css/master.css" %}">
+
+</head>
+<body>
+<div class="row menu-group">
+    <div >
+        {% block sidebar %}
+            <div class="menu-group">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 "></div>
+
+                <div class="menu col-xs-1 col-sm-1 col-md-1 col-lg-1 ">
+                    <a class="button" href="{% url 'blog:post_list_view' %}">Strona główna</a>
+                </div>
+                <div class="menu col-xs-1 col-sm-1 col-md-1 col-lg-1 ">
+                    <a class="button" href="{% url 'blog:new_post' %}">Dodaj post</a>
+                </div>
+
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 "></div>
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
+                    {% if user.is_authenticated %}
+                        <span class=" menu">
+                            Użytkownik: {{ user.get_username }}
+                        </span>
+                        <span class="menu">
+                            <a class="button log" href="{% url 'logout' %}?next={{ request.path }}">Wyloguj się</a>
+                        </span>
+                    {% else %}
+
+                            <span class="menu">
+                                <a class="button log" href="{% url 'login' %}?next={{ request.path }}">Zaloguj</a>
+                            </span>
+                            <span class="menu">
+                                <a class="button log" href="{% url 'blog:signup' %}?next={{ request.path }}">Zarejestruj się</a>
+                            </span>
+
+                    {% endif %}
+                </div>
+
+            </div>
+        {% endblock %}
+    </div>
+</div>
+<div class="row ">
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+
+    <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 back">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+
+</div>
+
+
+
+</body>
+</html>

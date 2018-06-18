@@ -1,0 +1,125 @@
+body{
+    font-family: 'Titillium Web', sans-serif;
+        background-color: whitesmoke;
+
+}
+
+.menu{
+    color: white;
+    padding: 1vw;
+    text-decoration: none;
+    width: 15%;
+    font-size: 1vw;
+    margin: 0px;
+
+
+}
+.log{
+    padding: 1vw;
+}
+
+.menu-group{
+    margin: 0px;
+    background-color: #444444 ;
+    color: whitesmoke ;
+}
+.button{
+
+    color: whitesmoke;
+
+    text-decoration: none !important;
+
+}
+.button:hover{
+    text-decoration: none !important;
+    color:lightgrey;
+}
+.back{
+    background-color: whitesmoke;
+    height: 100%;
+}
+.footer{
+    margin: 0px;
+    background-color: #1b6d85 ;
+    color: whitesmoke ;
+    text-align: right;
+    width: 100%;
+}
+.post_title{
+    text-align: center;
+    font-size: 2vw;
+    margin-top: 1vw;
+}
+.post_image{
+}
+.post-public{
+    text-align: right;
+}
+.comment-container{
+    padding: 0px;
+}
+.add_comment-title{
+    text-align: center;
+    font-size: 2vw;
+    margin-top: 1vw;
+}
+.add_comment-container{
+padding: 1vw;
+}
+.add_post-title{
+    text-align: center;
+    font-size: 2vw;
+    margin-top: 5vw;
+}
+.add_post-container{
+    padding: 1vw;
+}
+textarea {
+    resize: none;
+}
+.signup-title{
+    text-align: center;
+    font-size: 2vw;
+    margin-top: 5vw;
+}
+.signup-label{
+    text-align: right;
+    margin-top: 1vw;
+}
+.signup-button{
+    float: right;
+    margin-top: 1vw;
+    margin-right: 4vw;
+}
+.login-error{
+    text-align: center;
+    font-size: 1vw;
+    margin-top: 5vw;
+    color: #1b6d85;
+}
+.login-title{
+    text-align: center;
+    font-size: 2vw;
+    margin-top: 5vw;
+}
+.signup-empty{
+    height: 3vw;
+}
+.signup-form{
+    margin-top: 1vw;
+}
+.login-label{
+    text-align: right;
+    margin-top: 1vw;
+}
+.login-form{
+    margin-top: 1vw;
+}
+.login-input{
+    float: right;
+    margin-top: 1vw;
+    margin-right: 2.5vw;
+}
+.add_post-empty{
+    height: 3vw;
+}

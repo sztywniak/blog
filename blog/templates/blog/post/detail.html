@@ -1,0 +1,74 @@
+{% extends "blog/master.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <p class="post_title">{{ post.title }}</p>
+        <div class="row">
+
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            {% if post.image %}
+                <div class="post_image col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+                    <img src="{{ post.image.url }}" class="img-responsive">
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <p class="small post-public" style="color: #777777">Opublikowany {{ post.publish }}
+                        przez {{ post.author }}</p>
+                    <p>{{ post.body|linebreaks }}</p>
+                </div>
+            {% else %}
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <p class="small post-public" style="color: #777777">Opublikowany {{ post.publish }}
+                        przez {{ post.author }}</p>
+                    <p>{{ post.body|linebreaks }}</p>
+                </div>
+            {% endif %}
+
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+
+        </div>
+
+
+    </div>
+    <hr>
+    <div class="row">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                <div class="comment-container col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <a class="btn btn-default" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Dodaj
+                        komentarz</a>
+                </div>
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+            </div>
+    {% for comment in post.comments.all %}
+        {% if user.is_authenticated %}
+
+
+            <div class="row">
+                <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+                <div class="comment-container col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    {#            <a class="btn btn-default" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Dodaj komentarz</a>#}
+
+                    <div class="comment">
+                        <div class="date">
+                            <p> {{ comment.created_date }}</p>
+                            <p>{{ comment.body|linebreaks }}</p>
+                            <p class="small post-public" style="color: #67b168">Dodano {{ comment.publish }}
+                                przez {{ comment.author }}</p>
+                            {% if user.get_username == comment.author.get_username %}
+                                <a class="btn btn-default"
+                                   href="{% url 'blog:comment_remove' pk=comment.pk %}">Usuń</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+
+                </div>
+
+            </div>
+        {% endif %}
+        {% empty %}
+        <p>Brak komentarzy</p>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "blog/master.html" %}
+{% block content %}
+    <div class="row">
+        <p class="add_post-title">Nowy post</p>
+        <div class="add_post-empty"></div>
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <form method="post" enctype='multipart/form-data'>{% csrf_token %}
+                    <p>
+                    <div class="add_post-label"></div>
+                    </p>
+                    {{ form.as_p }}
+                    <button type="submit">Zapisz</button>
+                </form>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+        </div>
+    </div>
+
+{% endblock %}
